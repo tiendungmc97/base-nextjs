@@ -1,0 +1,20 @@
+{
+    "Seo": {
+      "title": "EN Title",
+      "description": "EN Description"
+    },
+    "LocaleSwitcher": {
+      "label": "Change language",
+      "locale": "{locale, select, ja {Japan} en {English} vi {Viet Nam} other {Unknown}}"
+    },
+    "Auth": {
+      "title": "auth"
+    },
+    "Users": {
+      "title": "users",
+      "card": "card"
+    },
+    "Home": {
+      "title": "home EN"
+    }
+  }
