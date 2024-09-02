@@ -1,14 +1,19 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { axiosJson } from "@/config/api";
 import { MetaData } from "@/interface/common";
+const getStore = async () => {
+  const { store } = await import('@/redux/store');
+  return store;
+};
+
 const client = axios.create(axiosJson);
 
 client.interceptors.request.use(
   async (
     config: InternalAxiosRequestConfig
   ): Promise<InternalAxiosRequestConfig> => {
-    // Retreive token from Redux OR localStorage or ....
-    const token = "";
+    const store = await getStore();
+    const token = store.getState().auth.token;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
       config.headers["Access-Control-Allow-Credentials"] = true;

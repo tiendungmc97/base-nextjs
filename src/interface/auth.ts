@@ -6,7 +6,7 @@ export interface BodyRegister {
     username: string;
     password: string;
 }
-export interface Login {
+export interface LoginData {
     token: string;
     email: string;
 }
