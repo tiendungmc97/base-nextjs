@@ -31,7 +31,7 @@ export default function Login(props: ILoginProps) {
             }
             const res = await authApi.login(body)
             if (res.data.meta[0].code === MetaData.SUCCESS) {
-
+                
             }
         } catch (error) {
 
