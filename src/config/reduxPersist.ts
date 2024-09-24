@@ -15,9 +15,7 @@ const createNoopStorage = () => {
 };
 
 export const storage =
-  typeof window !== "undefined"
-    ? createWebStorage("local")
-    : createNoopStorage();
+  typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 export const authPersistConfig = {
   key: "auth",

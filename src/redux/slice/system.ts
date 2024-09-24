@@ -1,4 +1,3 @@
-import { LoginData } from "@/interface/auth";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -6,7 +5,7 @@ const initialState = {
 };
 
 export const systemSlice = createSlice({
-  name: "auth",
+  name: "system",
   initialState,
   reducers: {
     updateSystem: (state, action: PayloadAction<any>) => {
