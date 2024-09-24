@@ -6,6 +6,4 @@ const axiosJson: AxiosRequestConfig = {
   timeout: 30000,
 };
 
-export {
-    axiosJson
-}
+export { axiosJson };

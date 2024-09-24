@@ -2,16 +2,14 @@ import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { axiosJson } from "@/config/api";
 import { MetaData } from "@/interface/common";
 const getStore = async () => {
-  const { store } = await import('@/redux/store');
+  const { store } = await import("@/redux/store");
   return store;
 };
 
 const client = axios.create(axiosJson);
 
 client.interceptors.request.use(
-  async (
-    config: InternalAxiosRequestConfig
-  ): Promise<InternalAxiosRequestConfig> => {
+  async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
     const store = await getStore();
     const token = store.getState().auth.token;
     if (token) {
@@ -19,7 +17,7 @@ client.interceptors.request.use(
       config.headers["Access-Control-Allow-Credentials"] = true;
     }
     return config;
-  }
+  },
 );
 
 client.interceptors.response.use(
@@ -35,7 +33,7 @@ client.interceptors.response.use(
     } else {
       throw error;
     }
-  }
+  },
 );
 
 export default client;
