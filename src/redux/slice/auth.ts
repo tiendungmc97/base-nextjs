@@ -1,13 +1,14 @@
-import { LoginData } from "@/interface/auth";
+import { Account, LoginData } from "@/interface/auth";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import exp from "constants";
 
 const initialState = {
-  accessToken: "accessToken",
-  refreshToken: "refreshToken",
-  expireTime: "2026-12-31T23:59:59Z",
+  accessToken: "",
+  refreshToken: "",
+  expireTime: "",
   account: {
-    email: "",
+    accessToken: "",
+    refreshToken: "",
+    expireTime: "",
   },
 };
 
@@ -15,7 +16,12 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    updateAccount: (state, action: PayloadAction<LoginData>) => {},
+    updateAccount: (state, action: PayloadAction<Account>) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.expireTime = action.payload.expireTime;
+      state.account = action.payload;
+    },
   },
 });
 

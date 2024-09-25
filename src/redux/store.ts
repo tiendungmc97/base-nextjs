@@ -1,24 +1,8 @@
-import { authPersistConfig } from "@/config/reduxPersist";
-import authReducer from "@/redux/slice/auth";
-import systemReducer from "@/redux/slice/system";
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import logger from "redux-logger";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-
-const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  system: systemReducer,
-});
+import { FLUSH, PAUSE, PERSIST, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import { rootReducer } from "./rootReducer";
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -42,3 +26,10 @@ export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 export const persistor = persistStore(store);
+
+// Function to purge and rehydrate the state
+export const purgeAndRehydrate = async () => {
+  await persistor.purge();
+  await persistor.flush();
+  await persistor.persist();
+};

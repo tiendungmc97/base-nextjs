@@ -1,7 +1,7 @@
 "use client";
 
 import authApi from "@/api/module/auth";
-import { BodyLogin, LoginData } from "@/interface/auth";
+import { Account, BodyLogin, LoginData } from "@/interface/auth";
 import { MetaData } from "@/interface/common";
 import { updateAccount } from "@/redux/slice/auth";
 import { updateSystem } from "@/redux/slice/system";
@@ -17,9 +17,10 @@ export default function Login(props: ILoginProps) {
     postLogin();
   };
   const postLogin = async () => {
-    const data: LoginData = {
-      email: "user@gmail.com",
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI",
+    const data: Account = {
+      accessToken: "user@gmail.com",
+      expireTime: "eyJhbGciOiJIUzI1NiIsInR5cCI",
+      refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI",
     };
     dispatch(updateAccount(data));
     dispatch(updateSystem("dark"));

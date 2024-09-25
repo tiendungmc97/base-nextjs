@@ -20,5 +20,5 @@ export const storage =
 export const authPersistConfig = {
   key: "auth",
   storage: storage,
-  whitelist: ["token"],
+  whitelist: ["accessToken", "refreshToken", "expireTime", "account"],
 };

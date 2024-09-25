@@ -3,7 +3,6 @@ import { useAppSelector } from "@/redux/store";
 import { useEffect } from "react";
 
 import { ReactNode } from "react";
-// import test from "../../../../public";
 interface TokenMessage {
   expireTime: string;
   refreshToken: string;
@@ -13,7 +12,7 @@ interface TokenResponse {
   accessToken?: string;
   expireTime?: string;
   refreshToken?: string;
-  isExpired?: boolean;
+  isExpired: boolean;
   error?: string;
 }
 

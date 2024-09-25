@@ -6,9 +6,16 @@ export interface BodyRegister {
   username: string;
   password: string;
 }
+export interface Account {
+  accessToken: string;
+  refreshToken: string;
+  expireTime: string;
+}
 export interface LoginData {
-  token: string;
-  email: string;
+  accessToken: string;
+  refreshToken: string;
+  expireTime: string;
+  account: Account;
 }
 export interface Register {
   email: string;
