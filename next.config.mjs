@@ -1,4 +1,4 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -10,21 +10,21 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/home',
+        source: "/",
+        destination: "/login",
         permanent: true,
       },
       {
-        source: '/en',
-        destination: '/en/home',
+        source: "/en",
+        destination: "/en/login",
         permanent: true,
       },
       {
-        source: '/ja',
-        destination: '/ja/home',
+        source: "/ja",
+        destination: "/ja/login",
         permanent: true,
       },
-    ]
+    ];
   },
 };
 

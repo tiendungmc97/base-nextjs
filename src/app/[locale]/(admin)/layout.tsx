@@ -1,54 +1,13 @@
-"use client";
-import { useAppSelector } from "@/redux/store";
-import { useEffect } from "react";
-
-import { ReactNode } from "react";
-interface TokenMessage {
-  expireTime: string;
-  refreshToken: string;
+import { unstable_setRequestLocale } from "next-intl/server";
+export interface IAdminLayoutProps {
+  children: React.ReactNode;
+  params: {
+    locale: string;
+  };
 }
 
-interface TokenResponse {
-  accessToken?: string;
-  expireTime?: string;
-  refreshToken?: string;
-  isExpired: boolean;
-  error?: string;
-}
-
-const Layout = ({ children }: { children: ReactNode }) => {
-  const refreshToken = useAppSelector((state) => state.auth.refreshToken);
-  const accessToken = useAppSelector((state) => state.auth.accessToken);
-  const expireTime = useAppSelector((state) => state.auth.expireTime);
-
-  useEffect(() => {
-    if (!refreshToken || !expireTime || typeof window === "undefined") {
-      return;
-    }
-    const worker = new Worker("/web-worker/token-worker.js");
-    worker.onmessage = (event: MessageEvent<TokenResponse>) => {
-      const { isExpired, accessToken, refreshToken, expireTime, error } = event.data;
-      if (!isExpired) {
-        // Refresh token
-        console.log("Token refreshed", { accessToken, refreshToken, expireTime });
-      } else {
-        console.log(error);
-      }
-    };
-
-    const tokenMessage: TokenMessage = {
-      refreshToken,
-      expireTime,
-    };
-
-    worker.postMessage(tokenMessage);
-
-    return () => {
-      worker.terminate();
-    };
-  }, [refreshToken, expireTime]);
-
+export default function AdminLayout(props: IAdminLayoutProps) {
+  const { children, params } = props;
+  unstable_setRequestLocale(params.locale);
   return <div>{children}</div>;
-};
-
-export default Layout;
+}

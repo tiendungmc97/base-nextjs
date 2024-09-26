@@ -1,7 +1,8 @@
 import { locales } from "@/config/i18n";
-import ReduxProvider from "@/provider/redux";
+import ReduxProvider from "@/provider/Redux";
+import TokenProvider from "@/provider/Token";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Archivo } from "next/font/google";
 import { ReactNode } from "react";
 
@@ -33,12 +34,15 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const messages = await getMessages({ locale: locale });
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <ReduxProvider>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>
+            <TokenProvider>{children}</TokenProvider>
+          </NextIntlClientProvider>
         </ReduxProvider>
       </body>
     </html>

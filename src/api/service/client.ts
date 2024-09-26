@@ -11,7 +11,7 @@ const client = axios.create(axiosJson);
 client.interceptors.request.use(
   async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
     const store = await getStore();
-    const token = store.getState().auth.token;
+    const token = store.getState().auth.accessToken;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
       config.headers["Access-Control-Allow-Credentials"] = true;

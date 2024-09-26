@@ -7,8 +7,8 @@ export interface ISeoLayoutProps {
   };
 }
 export default function SeoLayout(props: ISeoLayoutProps) {
-  unstable_setRequestLocale(props.params.locale);
-  const { children } = props;
+  const { children, params } = props;
+  unstable_setRequestLocale(params.locale);
   return (
     <>
       <div className="flex h-10 w-screen justify-between bg-gray-100">
