@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { HTMLInputTypeAttribute, useState } from "react";
 import { UseFormRegister, FieldErrors } from "react-hook-form";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface InputFieldProps {
   id: string;
   label: string;
-  type: string;
+  type: HTMLInputTypeAttribute;
   register: UseFormRegister<any>;
   errors: FieldErrors;
   showToggle?: boolean;
