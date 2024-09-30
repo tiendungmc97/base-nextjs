@@ -1,10 +1,14 @@
-import { locales } from "@/config/i18n";
-import ReduxProvider from "@/provider/Redux";
-import TokenProvider from "@/provider/Token";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Archivo } from "next/font/google";
 import { ReactNode } from "react";
+import { ThemeProvider } from "@mui/material";
+
+import { locales } from "@/config/i18n";
+import { theme } from "@/config/theme-mui";
+import "@/app/globals.css";
+import ReduxProvider from "@/provider/Redux";
+import TokenProvider from "@/provider/Token";
 import Header from "../components/Header";
 
 const inter = Archivo({
@@ -37,14 +41,19 @@ export default async function RootLayout({
 }) {
   unstable_setRequestLocale(locale);
   const messages = await getMessages({ locale: locale });
+
   return (
     <html lang={locale}>
       <body className={inter.className}>
         <ReduxProvider>
-          <NextIntlClientProvider messages={messages}>
-            <Header />
-            <TokenProvider>{children}</TokenProvider>
-          </NextIntlClientProvider>
+          <TokenProvider>
+            <NextIntlClientProvider messages={messages}>
+              <ThemeProvider theme={theme}>
+                <Header />
+                {children}
+              </ThemeProvider>
+            </NextIntlClientProvider>
+          </TokenProvider>
         </ReduxProvider>
       </body>
     </html>

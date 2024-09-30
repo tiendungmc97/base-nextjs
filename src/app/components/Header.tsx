@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import LocaleSwitcher from "./LocaleSwitcher";
+import useOnClickOutside from "../hook/useOnClickOutside";
 
 export interface IHeaderProps {}
 
 export default function Header(props: IHeaderProps) {
+  const navTable = useOnClickOutside<HTMLDivElement>(() => setShowDropdown(false));
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -19,7 +21,7 @@ export default function Header(props: IHeaderProps) {
         <a href="/home" className="transition-colors duration-300 hover:opacity-70">
           Home
         </a>
-        <div className="relative">
+        <div className="relative" ref={navTable}>
           <button
             onClick={handleDropdownToggle}
             className="flex w-full items-center justify-between rounded px-3 py-2"

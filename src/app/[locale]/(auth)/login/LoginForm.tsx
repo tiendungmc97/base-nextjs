@@ -1,13 +1,14 @@
 "use client";
+import { Account } from "@/interface/auth";
+import { updateAccount } from "@/redux/slice/auth";
+import { useAppDispatch } from "@/redux/store";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "@mui/material";
+import moment from "moment";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import InputField from "../../components/form/InputField";
-import { Account } from "@/interface/auth";
-import { useAppDispatch } from "@/redux/store";
-import { updateAccount } from "@/redux/slice/auth";
-import { useRouter } from "next/navigation";
-import moment from "moment";
 export interface ILoginFormProps {}
 
 interface IFormInputs {
@@ -69,12 +70,9 @@ export default function LoginForm(props: ILoginFormProps) {
         autocomplete="current-password"
       />
       <div className="flex items-center justify-between">
-        <button
-          type="submit"
-          className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
-        >
+        <Button type="submit" fullWidth variant="contained" color="info">
           Sign In
-        </button>
+        </Button>
       </div>
     </form>
   );

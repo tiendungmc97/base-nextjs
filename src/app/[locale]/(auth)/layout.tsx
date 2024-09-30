@@ -1,4 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
+
 export interface ISeoLayoutProps {
   children: React.ReactNode;
   params: {

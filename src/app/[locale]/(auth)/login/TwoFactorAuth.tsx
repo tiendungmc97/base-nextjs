@@ -91,6 +91,7 @@ export default function TwoFactorAuth() {
             onPaste={handlePaste}
             onKeyDown={(e) => handleKeyDown(e, index)}
             maxLength={1}
+            readOnly
             className="h-10 w-10 rounded border border-gray-300 text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         ))}

@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useState, useTransition } from "react";
+import useOnClickOutside from "../hook/useOnClickOutside";
 
 export default function LocaleSwitcher() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function LocaleSwitcher() {
   const pathname = usePathname();
   const params = useParams();
   const currentLocale = useLocale();
+  const ref = useOnClickOutside<HTMLDivElement>(() => setShowDropdown(false));
   const [showDropdown, setShowDropdown] = useState(false);
   const [locale, setLocale] = useState<string>(currentLocale);
   const [isPending, startTransition] = useTransition();
@@ -32,7 +34,10 @@ export default function LocaleSwitcher() {
     });
   };
   return (
-    <label className={clsx("relative", isPending && "transition-opacity [&:disabled]:opacity-30")}>
+    <div
+      className={clsx("relative", isPending && "transition-opacity [&:disabled]:opacity-30")}
+      ref={ref}
+    >
       <button
         onClick={handleDropdownToggle}
         className="flex w-full items-center justify-between rounded px-3 py-2"
@@ -73,6 +78,6 @@ export default function LocaleSwitcher() {
           </ul>
         </div>
       )}
-    </label>
+    </div>
   );
 }
