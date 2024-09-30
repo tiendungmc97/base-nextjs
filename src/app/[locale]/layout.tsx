@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Archivo } from "next/font/google";
 import { ReactNode } from "react";
+import Header from "../components/Header";
 
 const inter = Archivo({
   weight: "400",
@@ -41,6 +42,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <NextIntlClientProvider messages={messages}>
+            <Header />
             <TokenProvider>{children}</TokenProvider>
           </NextIntlClientProvider>
         </ReduxProvider>
