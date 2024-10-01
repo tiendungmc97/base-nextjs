@@ -50,12 +50,12 @@ export default function Header(props: IHeaderProps) {
             >
               <ul className="py-2 text-sm">
                 <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                  <a href="/table/client" className="block px-4 py-2 hover:bg-gray-100">
                     Table Client
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                  <a href="/table/server" className="block px-4 py-2 hover:bg-gray-100">
                     Table Server
                   </a>
                 </li>
