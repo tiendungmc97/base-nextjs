@@ -3,7 +3,6 @@ import { Account } from "@/interface/auth";
 import { updateAccount } from "@/redux/slice/auth";
 import { useAppDispatch } from "@/redux/store";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -70,9 +69,7 @@ export default function LoginForm(props: ILoginFormProps) {
         autocomplete="current-password"
       />
       <div className="flex items-center justify-between">
-        <Button type="submit" fullWidth variant="contained" color="info">
-          Sign In
-        </Button>
+        <button type="submit">Sign In</button>
       </div>
     </form>
   );

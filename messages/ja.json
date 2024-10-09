@@ -16,5 +16,11 @@
   },
   "Home": {
     "title": "home JP"
+  },
+  "Header": {
+    "login": "ログイン",
+    "home": "ホーム",
+    "table": "テーブル",
+    "dashboard": "ダッシュボード"
   }
 }

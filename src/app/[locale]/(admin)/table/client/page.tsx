@@ -1,6 +1,6 @@
 "use client";
 import React, { HTMLProps, useEffect, useMemo, useState } from "react";
-import { makeData, Person } from "./data";
+import { makeData, Person } from "./makeData";
 
 import {
   ColumnDef,
@@ -101,7 +101,7 @@ export default function PageClient() {
       setSortType("null");
       return;
     }
-    const name = state[0]?.desc ? `desc_${state[0]?.id}` : `asc_${state[0]?.id}`;
+    const name = state[0]?.desc ? `${state[0]?.id}.desc` : `${state[0]?.id}.asc`;
     setSortType(name);
   };
   const table = useReactTable({
@@ -136,13 +136,13 @@ export default function PageClient() {
     const value = e.target.value;
     let sortBy: SortingState = [];
 
-    if (value === "asc_firstName") {
+    if (value === "firstName.asc") {
       sortBy = [{ id: "firstName", desc: false }];
-    } else if (value === "desc_firstName") {
+    } else if (value === "firstName.desc") {
       sortBy = [{ id: "firstName", desc: true }];
-    } else if (value === "asc_age") {
+    } else if (value === "age.asc") {
       sortBy = [{ id: "age", desc: false }];
-    } else if (value === "desc_age") {
+    } else if (value === "age.desc") {
       sortBy = [{ id: "age", desc: true }];
     }
 
@@ -184,10 +184,10 @@ export default function PageClient() {
           className="rounded border border-gray-300 p-2"
         >
           <option value="null">null</option>
-          <option value="asc_firstName">asc first name</option>
-          <option value="desc_firstName">desc first name</option>
-          <option value="asc_age">asc age</option>
-          <option value="desc_age">desc age</option>
+          <option value="firstName.asc">asc first name</option>
+          <option value="firstName.desc">desc first name</option>
+          <option value="age.asc">asc age</option>
+          <option value="age.desc">desc age</option>
         </select>
       </div>
       {itemSelected.index !== undefined && <DetailItem item={itemSelected} setItem={handleSave} />}

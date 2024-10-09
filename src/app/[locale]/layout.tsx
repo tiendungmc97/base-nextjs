@@ -2,13 +2,12 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Archivo } from "next/font/google";
 import { ReactNode } from "react";
-import { ThemeProvider } from "@mui/material";
 
 import { locales } from "@/config/i18n";
-import { theme } from "@/config/theme-mui";
 import "@/app/globals.css";
 import ReduxProvider from "@/provider/Redux";
 import TokenProvider from "@/provider/Token";
+import QueryProvider from "@/provider/Query";
 import Header from "../components/Header";
 
 const inter = Archivo({
@@ -48,10 +47,10 @@ export default async function RootLayout({
         <ReduxProvider>
           <TokenProvider>
             <NextIntlClientProvider messages={messages}>
-              <ThemeProvider theme={theme}>
+              <QueryProvider>
                 <Header />
                 {children}
-              </ThemeProvider>
+              </QueryProvider>
             </NextIntlClientProvider>
           </TokenProvider>
         </ReduxProvider>

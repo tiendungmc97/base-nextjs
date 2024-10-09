@@ -1,7 +1,7 @@
 "use client";
-import React, { HTMLProps } from "react";
 
 import { Column, flexRender, Table } from "@tanstack/react-table";
+import { HTMLProps, useEffect, useRef } from "react";
 
 interface TableClientProps {
   table: Table<any>;
@@ -219,9 +219,9 @@ function IndeterminateCheckbox({
   className = "",
   ...rest
 }: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
-  const ref = React.useRef<HTMLInputElement>(null!);
+  const ref = useRef<HTMLInputElement>(null!);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof indeterminate === "boolean") {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }

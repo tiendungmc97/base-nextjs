@@ -3,10 +3,9 @@
 import { Account } from "@/interface/auth";
 import { logout } from "@/redux/actions";
 import { updateAccount } from "@/redux/slice/auth";
-import { purgeAndRehydrate, useAppDispatch, useAppSelector } from "@/redux/store";
-import moment from "moment";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useLayoutEffect } from "react";
 
 export interface TokenResponse {
   isExpired: boolean;
@@ -31,8 +30,9 @@ export default function TokenProvider(props: ITokenProviderProps) {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const expireTime = useAppSelector((state) => state.auth.expireTime);
   const pathname = usePathname();
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!refreshToken || !expireTime || typeof window === "undefined") {
+      router.push("/login");
       return;
     }
     const worker = new Worker("/web-worker/token-worker.js");
@@ -64,6 +64,6 @@ export default function TokenProvider(props: ITokenProviderProps) {
     return () => {
       worker.terminate();
     };
-  }, [refreshToken, expireTime, pathname]);
+  }, [refreshToken, expireTime, router, pathname, dispatch]);
   return <>{props.children}</>;
 }

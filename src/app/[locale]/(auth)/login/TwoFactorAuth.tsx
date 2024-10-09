@@ -33,10 +33,7 @@ export default function TwoFactorAuth() {
       default:
         if (/^\d$/.test(e.key)) {
           handleDigitInput(e.key, index);
-        } else {
-          e.preventDefault();
         }
-        break;
     }
   };
 
